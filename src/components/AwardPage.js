@@ -27,7 +27,15 @@ function AwardPage() {
   const filterByType = (type) => {
     return data
       .filter((item) => item.type === type)
-      .filter((item) => item.name.toLowerCase().includes(search.toLowerCase()));
+      .filter((item) => {
+        const s = search.toLowerCase();
+
+        return (
+          item.name.toLowerCase().includes(s) ||
+          item.date.toLowerCase().includes(s) ||
+          item.place.toLowerCase().includes(s)
+        );
+      });
   };
 
   const awardTypes = [
@@ -47,7 +55,7 @@ function AwardPage() {
       <div className="search-box">
         <input
           type="text"
-          placeholder="Search by award name..."
+          placeholder="Search..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
