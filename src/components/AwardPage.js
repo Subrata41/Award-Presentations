@@ -24,16 +24,44 @@ function AwardPage() {
     fetchData();
   }, []);
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+
+    const day = date.getDate();
+    const year = date.getFullYear();
+
+    const month = date.toLocaleString("en-US", { month: "long" });
+
+    const getSuffix = (d) => {
+      if (d > 3 && d < 21) return "th";
+      switch (d % 10) {
+        case 1:
+          return "st";
+        case 2:
+          return "nd";
+        case 3:
+          return "rd";
+        default:
+          return "th";
+      }
+    };
+
+    return `${day}${getSuffix(day)} ${month} ${year}`;
+  };
+
   const filterByType = (type) => {
     return data
       .filter((item) => item.type === type)
       .filter((item) => {
         const s = search.toLowerCase();
 
+        const formattedDate = formatDate(item.date).toLowerCase();
+
         return (
           item.name.toLowerCase().includes(s) ||
           item.date.toLowerCase().includes(s) ||
-          item.place.toLowerCase().includes(s)
+          item.place.toLowerCase().includes(s) ||
+          formattedDate.includes(s)
         );
       });
   };
@@ -64,7 +92,12 @@ function AwardPage() {
       {/* Tables */}
       <div className="tables-wrapper">
         {awardTypes.map((type) => (
-          <AwardTable key={type} title={type} data={filterByType(type)} />
+          <AwardTable
+            key={type}
+            title={type}
+            formatDate={formatDate}
+            data={filterByType(type)}
+          />
         ))}
       </div>
     </div>

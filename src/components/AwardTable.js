@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./AwardTable.css";
 
-function AwardTable({ title, data }) {
+function AwardTable({ title, data, formatDate }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -18,32 +18,6 @@ function AwardTable({ title, data }) {
 
   const goToPage = (num) => {
     if (num >= 1 && num <= totalPages) setCurrentPage(num);
-  };
-
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-
-    const day = date.getDate();
-    const year = date.getFullYear();
-
-    // Month name
-    const month = date.toLocaleString("en-US", { month: "long" });
-
-    const getSuffix = (d) => {
-      if (d > 3 && d < 21) return "th";
-      switch (d % 10) {
-        case 1:
-          return "st";
-        case 2:
-          return "nd";
-        case 3:
-          return "rd";
-        default:
-          return "th";
-      }
-    };
-
-    return `${day}${getSuffix(day)} ${month} ${year}`;
   };
 
   return (
