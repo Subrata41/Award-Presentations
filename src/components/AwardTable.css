@@ -1,0 +1,68 @@
+/* Wrapper centers everything */
+.award-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+  }
+  
+  /* Center the title */
+  .award-header h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Center table & add styling */
+  .award-table {
+    width: 80%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    text-align: center;
+    background: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .award-table th {
+    background: #f4f4f4;
+    padding: 12px;
+    font-size: 16px;
+  }
+  
+  .award-table td {
+    padding: 10px;
+    border-bottom: 1px solid #e8e8e8;
+  }
+  
+  .award-table tr:hover {
+    background: #f9f9f9;
+  }
+  
+  /* Pagination section */
+  .pagination-container {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+  }
+  
+  .rows-select select {
+    padding: 4px 6px;
+    border-radius: 5px;
+  }
+  
+  .pagination-buttons button {
+    margin: 0 5px;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .pagination-buttons button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  

@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import AwardTable from "./AwardTable";
+import "./AwardPage.css";
 
 function AwardPage() {
   const [data, setData] = useState([]);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,7 +24,11 @@ function AwardPage() {
     fetchData();
   }, []);
 
-  const filterByType = (type) => data.filter((item) => item.type === type);
+  const filterByType = (type) => {
+    return data
+      .filter((item) => item.type === type)
+      .filter((item) => item.name.toLowerCase().includes(search.toLowerCase()));
+  };
 
   const awardTypes = [
     "National Awards",
@@ -34,12 +40,25 @@ function AwardPage() {
   ];
 
   return (
-    <div>
-      <h1>Award Presentation</h1>
+    <div className="award-page">
+      <h1 className="page-title">Award Presentations</h1>
 
-      {awardTypes.map((type) => (
-        <AwardTable key={type} title={type} data={filterByType(type)} />
-      ))}
+      {/* Search Bar */}
+      <div className="search-box">
+        <input
+          type="text"
+          placeholder="Search by award name..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
+
+      {/* Tables */}
+      <div className="tables-wrapper">
+        {awardTypes.map((type) => (
+          <AwardTable key={type} title={type} data={filterByType(type)} />
+        ))}
+      </div>
     </div>
   );
 }
